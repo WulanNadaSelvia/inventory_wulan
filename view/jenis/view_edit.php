@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css">
-    <title>tambah data jenis</title>
+    <title>edit data jenis</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -16,24 +16,33 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="">barang</a>
+          <a class="nav-link active" aria-current="page" href="#">barang</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="../jenis/index.php">jenis</a>
+          <a class="nav-link" href="#">jenis</a>
         </li>
     </div>
   </div>
 </nav>
+<?php
+ include '../../config/koneksi.php';
+ $id_jenis=$_GET['id'];
+ $query=mysqli_query($conn, "SELECT * FROM jenis WHERE id_jenis='$id_jenis'");
+ $result=mysqli_fetch_array($query);
+ ?>
     <div class="container">
-        <h1>tambah data jenis</h1>
-        <form action="proses_tambah.php" method="post">
+        <h1>edit data jenis</h1>
+        <?php
+ include '../../config/koneksi.php';
+ ?>
+        <form action="proses_edit.php" method="POST">
             <div class="mb-3">
-                <label for="" class="form-label">ID_Jenis</label>
-                <input type="text" class="form-control" name="id_jenis" id="" placeholder=""/>
+                <label for="" class="form-label">id_jenis</label>
+                <input type="text" class="form-control" value="<?php echo $result['id_jenis'];?> "name="id_jenis" id="" placeholder=""/>
             </div>
                 <div class="mb-3">
-                    <label for="" class="form-label">Nama_jenis</label>
-                    <input type="text" class="form-control" name="nama_jenis" id="" placeholder=""/>
+                    <label for="" class="form-label">nama_jenis</label>
+                    <input type="text" class="form-control"  value="<?php echo $result['nama_jenis'];?> "name="nama_jenis" id="" placeholder=""/>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
         </form>
